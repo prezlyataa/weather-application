@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-let fetchWeather = geocodeUrl => {
+let fetchWeather = (geocodeUrl, res) => {
   axios
     .get(geocodeUrl)
     .then(response => {
@@ -19,11 +19,10 @@ let fetchWeather = geocodeUrl => {
       console.log(
         `Temperature: ${temperature}, ApparentTemerature: ${apparentTemperature}`
       );
-      const weatherData = {
+      res.send({
         temp: temperature,
-        apparentTemp: apparentTemperature
-      };
-      console.log(weatherData);
+        appartTemp: apparentTemperature
+      });
     })
     .catch(e => {
       if (e.code === "ENOTFOUND") {

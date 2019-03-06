@@ -48,15 +48,11 @@ class AppComponent extends Component {
     const { address } = this.state;
     if (address.length > 0) {
       axios
-        .post("http://localhost:5000/address", {
-          address: address
+        .get("http://localhost:5000/weather", { params: { address: address } })
+        .then(res => {
+          console.log(res);
         });
     }
-    axios
-      .get("http://localhost:5000/weather")
-      .then(res => {
-        console.log(res);
-      });
   };
 
   render() {
