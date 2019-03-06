@@ -1,55 +1,84 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ReactAnimatedWeather from 'react-animated-weather';
+import axios from "axios";
+import ReactAnimatedWeather from "react-animated-weather";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import './app.component.scss';
+import "./app.component.scss";
 
 const defaults = {
-    icon: 'CLEAR_DAY',
-    color: 'goldenrod',
-    size: 100,
-    animate: true
+  icon: "CLEAR_DAY",
+  color: "goldenrod",
+  size: 100,
+  animate: true
 };
 
 const styles = {
-    root: {
-        padding: "2px 4px",
-        display: "flex",
-        alignItems: "center",
-        width: 400
-    },
-    input: {
-        marginLeft: 8,
-        flex: 1
-    },
-    iconButton: {
-        padding: 10
-    }
+  root: {
+    padding: "2px 4px",
+    display: "flex",
+    alignItems: "center",
+    width: 400
+  },
+  input: {
+    marginLeft: 8,
+    flex: 1
+  },
+  iconButton: {
+    padding: 10
+  }
 };
 
 class AppComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: ''
-    }
+      address: ""
+    };
   }
+
+  handleChange = e => {
+    this.setState({ address: e.target.value });
+  };
+
+  fetchWeather = () => {
+    const { address } = this.state;
+    if (address.length > 0) {
+      axios
+        .post("http://localhost:5000/address", {
+          address: address
+        });
+    }
+    axios
+      .get("http://localhost:5000/weather")
+      .then(res => {
+        console.log(res);
+      });
+  };
+
   render() {
     const { classes } = this.props;
 
     return (
       <div className="app">
         <div className="app__title">
-            <h2>Weather app</h2>
+          <h2>Weather app</h2>
         </div>
         <div className="app__search">
           <Paper className={classes.root} elevation={1}>
-            <InputBase className={classes.input} placeholder="City, zip code" />
-            <IconButton className={classes.iconButton} aria-label="Search">
+            <InputBase
+              className={classes.input}
+              placeholder="City, zip code"
+              onChange={this.handleChange}
+            />
+            <IconButton
+              className={classes.iconButton}
+              aria-label="Search"
+              onClick={this.fetchWeather}
+            >
               <SearchIcon />
             </IconButton>
           </Paper>
@@ -68,7 +97,7 @@ class AppComponent extends Component {
 }
 
 AppComponent.propTypes = {
-    classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(AppComponent);

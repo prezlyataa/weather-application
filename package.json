@@ -13,9 +13,13 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "path": "^0.12.7",
     "request": "^2.88.0",
     "yargs": "^13.1.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.4"
   }
 }
