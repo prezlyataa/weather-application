@@ -5,7 +5,7 @@ import "./weather-widget.component.scss";
 const defaults = {
   icon: "RAIN",
   color: "lightblue",
-  size: 100,
+  size: 40,
   animate: true
 };
 

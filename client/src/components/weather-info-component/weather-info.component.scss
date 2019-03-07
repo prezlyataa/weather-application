@@ -1,0 +1,10 @@
+.weather-info {
+  &__table {
+    display: flex;
+    justify-content: center;
+
+    .MuiPaper-root-4 {
+      max-width: 600px;
+    }
+  }
+}

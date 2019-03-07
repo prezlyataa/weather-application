@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { WeatherWidget } from "../weather-widget-component/weather-widget.component";
-import { WeatherInfo } from "../weather-info-component/weather-info-component";
+import WeatherInfo from "../weather-info-component/weather-info-component";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
@@ -78,7 +77,6 @@ class AppComponent extends Component {
         </div>
         {Object.keys(weatherData).length > 0 && (
           <div>
-            <WeatherWidget weatherData={weatherData}/>
             <WeatherInfo weatherData={weatherData}/>
           </div>
         )}
