@@ -19,10 +19,7 @@ let fetchWeather = (geocodeUrl, res) => {
       console.log(
         `Temperature: ${temperature}, ApparentTemerature: ${apparentTemperature}`
       );
-      res.send({
-        temp: temperature,
-        appartTemp: apparentTemperature
-      });
+      res.send(response.data);
     })
     .catch(e => {
       if (e.code === "ENOTFOUND") {
