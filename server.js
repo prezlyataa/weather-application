@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 app.get("/weather", (req, res, next) => {
   const address = res.req.query.address;
   const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=
-  ${address}&key=AIzaSyA9KBiF2lX5Rj9ehCaNAhSkws2ln2mvsic`;
+  ${address}&key=AIzaSyAbxqzC2IGT8BG6_OZV_UW_ANp5NTUTS6I`;
   weather.fetchWeather(geocodeUrl, res);
 });
 
