@@ -1,0 +1,18 @@
+.saved-places {
+  padding: 20px 0;
+  color: rgba(0, 0, 0, 0.6);
+
+  &__item {
+    display: inline-block;
+    margin-right: 5px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}

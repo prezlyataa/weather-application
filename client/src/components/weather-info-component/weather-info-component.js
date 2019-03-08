@@ -77,9 +77,8 @@ class WeatherInfo extends Component {
                 <TableRow>
                   <TableCell align="left">Humidity</TableCell>
                   <TableCell align="center"> </TableCell>
-
                   <TableCell align="right">
-                    {weatherData.currently.humidity * 100}%
+                    {(weatherData.currently.humidity * 100).toFixed(0)}%
                   </TableCell>
                 </TableRow>
                 <TableRow>

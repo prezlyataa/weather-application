@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import WeatherInfo from "../weather-info-component/weather-info-component";
+import { SavedPlaces } from "../saved-places-component/saved-places.component";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
@@ -30,12 +31,43 @@ class AppComponent extends Component {
     super(props);
     this.state = {
       address: "",
-      weatherData: {}
+      weatherData: {},
+      places: []
     };
+  }
+
+  componentDidMount() {
+    this.setPlaces();
   }
 
   handleChange = e => {
     this.setState({ address: e.target.value });
+  };
+
+  savePlace = place => {
+    let places = [];
+    let localStoragePlaces = JSON.parse(localStorage.getItem("places"));
+    if (localStoragePlaces !== null) {
+      places = localStoragePlaces;
+      if(!places.includes(place)) {
+        places.push(place);
+      }
+      localStorage.setItem("places", JSON.stringify(places));
+    } else {
+      if(!places.includes(place)) {
+        places.push(place);
+      }
+      localStorage.setItem("places", JSON.stringify(places));
+    }
+  };
+
+  setPlaces = () => {
+    let places = JSON.parse(localStorage.getItem("places"));
+    if (places !== null) {
+      {
+        this.setState({ places: places.slice(-5) });
+      }
+    }
   };
 
   fetchWeather = () => {
@@ -45,15 +77,23 @@ class AppComponent extends Component {
         .get("http://localhost:5000/weather", { params: { address: address } })
         .then(res => {
           this.setState({ weatherData: res.data });
+        })
+        .then(() => {
+          this.savePlace(address);
+          this.setPlaces();
         });
     }
   };
 
+  setPlaceFromLast = place => {
+    this.setState({ address: place });
+    this.fetchWeather();
+  };
+
   render() {
     const { classes } = this.props;
-    const { weatherData } = this.state;
-    console.log(weatherData);
-
+    const { weatherData, places } = this.state;
+    console.log(this.state.address);
     return (
       <div className="app">
         <div className="app__title">
@@ -75,9 +115,10 @@ class AppComponent extends Component {
             </IconButton>
           </Paper>
         </div>
+        <SavedPlaces places={places} setPlaceFromLast={this.setPlaceFromLast} />
         {Object.keys(weatherData).length > 0 && (
           <div>
-            <WeatherInfo weatherData={weatherData}/>
+            <WeatherInfo weatherData={weatherData} />
           </div>
         )}
       </div>
