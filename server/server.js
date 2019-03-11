@@ -17,6 +17,8 @@ app
     console.log(`Listening on port ${port}`);
   });
 
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname + "../client/build/index.html"));
-// });
+// app
+//   .use(express.static(path.join(__dirname, "client/build")))
+//   .get("/", (req, res) => {
+//     res.sendFile(path.join(__dirname + "/client/build/index.html"));
+//   });
