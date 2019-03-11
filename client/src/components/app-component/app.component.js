@@ -72,7 +72,7 @@ class AppComponent extends Component {
     const { address } = this.state;
     if (address.length > 0) {
       axios
-        .get("https://weather-express-app.herokuapp.com/weather", { params: { address: address } })
+        .get("/weather", { params: { address: address } })
         .then(res => {
           this.setState({ weatherData: res.data });
         })
