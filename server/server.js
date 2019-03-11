@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app
-  .use(express.static(path.join(__dirname, "client/build")))
+  .use(express.static(path.join(__dirname, "../client/build")))
   .use(cors())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
@@ -17,6 +17,6 @@ app
     console.log(`Listening on port ${port}`);
   });
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "../client/build/index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname + "../client/build/index.html"));
+// });
