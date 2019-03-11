@@ -7,6 +7,8 @@ const router = require("./router");
 const app = express();
 const port = process.env.PORT || 5000;
 
+__dirname = path.resolve();
+
 app
   .use(cors())
   .use(bodyParser.json())
@@ -17,9 +19,9 @@ app
   });
 
 app
-  .use(express.static(path.resolve(__dirname, "../client/build")))
+  .use(express.static(path.join(__dirname, "../client/build")))
   .get("/", (req, res) => {
-    res.sendFile(path.resolve(__dirname + "../client/build", "index.html"));
+    res.sendFile(path.join(__dirname + "../client/build/index.html"));
   });
 
 module.exports = app;
