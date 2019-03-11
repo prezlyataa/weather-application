@@ -5,7 +5,7 @@ const path = require("path");
 const weather = require("./weather/fetchWeather");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, "client/build")));
 app.use(bodyParser.json(), cors());
@@ -26,4 +26,9 @@ app.get("/test", (req,res,next) => {
   res.send({test: "test data"});
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, '0.0.0.0', err => {
+  if (err) {
+    console.log(err);
+  }
+  console.log(`Listening on port ${port}`)
+});
