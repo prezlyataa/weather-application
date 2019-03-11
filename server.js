@@ -22,4 +22,8 @@ app.get("/weather", (req, res, next) => {
   weather.fetchWeather(geocodeUrl, res);
 });
 
+app.get("/test", (req,res,next) => {
+  res.send({test: "test data"});
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
