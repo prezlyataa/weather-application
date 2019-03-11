@@ -10,8 +10,4 @@ router.get("/", (req, res) => {
 
 router.get("/weather", weatherController.getWeatherData);
 
-router.get("/test", (req, res) => {
-  res.send({ test: "test data" });
-});
-
 module.exports = router;
