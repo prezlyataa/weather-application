@@ -12,7 +12,7 @@ app
   .use(cors())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
-  .use("/", router)
+  .use('/', router)
   .listen(port, () => {
     console.log(`Listening on port ${port}`);
   });
