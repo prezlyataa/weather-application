@@ -24,10 +24,6 @@ const styles = theme => ({
 });
 
 class WeatherInfo extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   convertFToC = f => {
     let c = Math.round((f - 32) * (5 / 9));
     if (c > 0) {

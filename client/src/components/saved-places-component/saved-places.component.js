@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import "./saved-places.component.scss";
 
 export class SavedPlaces extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { places } = this.props;
     return (

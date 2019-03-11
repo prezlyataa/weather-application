@@ -49,12 +49,12 @@ class AppComponent extends Component {
     let localStoragePlaces = JSON.parse(localStorage.getItem("places"));
     if (localStoragePlaces !== null) {
       places = localStoragePlaces;
-      if(!places.includes(place)) {
+      if (!places.includes(place)) {
         places.push(place);
       }
       localStorage.setItem("places", JSON.stringify(places));
     } else {
-      if(!places.includes(place)) {
+      if (!places.includes(place)) {
         places.push(place);
       }
       localStorage.setItem("places", JSON.stringify(places));
@@ -64,9 +64,7 @@ class AppComponent extends Component {
   setPlaces = () => {
     let places = JSON.parse(localStorage.getItem("places"));
     if (places !== null) {
-      {
-        this.setState({ places: places.slice(-5) });
-      }
+      this.setState({ places: places.slice(-5) });
     }
   };
 

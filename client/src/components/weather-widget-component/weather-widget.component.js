@@ -23,27 +23,27 @@ const ICONS = [
 ];
 
 export class WeatherWidget extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   formateStr = str => {
-    return str.toLowerCase().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')
+    return str
+      .toLowerCase()
+      .replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, "");
   };
 
-  formanttedIcons = (icons) => {
+  formanttedIcons = icons => {
     return icons.map(icon => {
       return this.formateStr(icon);
     });
   };
 
   setIcon = icon => {
-    if(this.formanttedIcons(ICONS).some(i => {
-      return i === this.formateStr(icon);
-    })) {
+    if (
+      this.formanttedIcons(ICONS).some(i => {
+        return i === this.formateStr(icon);
+      })
+    ) {
       return ICONS[this.formanttedIcons(ICONS).indexOf(this.formateStr(icon))];
     } else {
-      return 'CLOUDY'
+      return "CLOUDY";
     }
   };
 
