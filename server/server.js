@@ -18,7 +18,7 @@ app
 
 app
   .use(express.static(path.resolve(__dirname, "../client/build")))
-  .get("*", (req, res) => {
+  .get("/", (req, res) => {
     res.sendFile(path.resolve(__dirname + "../client/build", "index.html"));
   });
 
