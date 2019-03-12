@@ -7,7 +7,9 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
+import Snackbar from "@material-ui/core/Snackbar";
 import SearchIcon from "@material-ui/icons/Search";
+import Button from "@material-ui/core/Button";
 import "./app.component.scss";
 
 const styles = {
@@ -32,13 +34,26 @@ class AppComponent extends Component {
     this.state = {
       address: "",
       weatherData: {},
-      places: []
+      places: [],
+      open: false
     };
   }
 
   componentDidMount() {
     this.setPlaces();
   }
+
+  handleClick = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    this.setState({ open: false });
+  };
 
   handleChange = e => {
     this.setState({ address: e.target.value });
@@ -68,7 +83,7 @@ class AppComponent extends Component {
     }
   };
 
-  fetchWeather = (address) => {
+  fetchWeather = address => {
     if (address.length > 0) {
       axios
         .get("/weather", { params: { address: address } })
@@ -78,6 +93,10 @@ class AppComponent extends Component {
         .then(() => {
           this.savePlace(address);
           this.setPlaces();
+        })
+        .catch(e => {
+          console.log(e);
+          this.handleClick();
         });
     }
   };
@@ -106,11 +125,43 @@ class AppComponent extends Component {
             <IconButton
               className={classes.iconButton}
               aria-label="Search"
-              onClick={() => {this.fetchWeather(address)}}
+              onClick={() => {
+                this.fetchWeather(address);
+              }}
             >
               <SearchIcon />
             </IconButton>
           </Paper>
+          <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left"
+            }}
+            open={this.state.open}
+            autoHideDuration={6000}
+            onClose={this.handleClose}
+            ContentProps={{
+              "aria-describedby": "message-id"
+            }}
+            message={<span id="message-id">Unable to fetch weather</span>}
+            action={[
+              <Button
+                key="undo"
+                color="secondary"
+                size="small"
+                onClick={this.handleClose}
+              >
+                UNDO
+              </Button>,
+              <IconButton
+                key="close"
+                aria-label="Close"
+                color="inherit"
+                className={classes.close}
+                onClick={this.handleClose}
+              />
+            ]}
+          />
         </div>
         <SavedPlaces places={places} setPlaceFromLast={this.setPlaceFromLast} />
         {Object.keys(weatherData).length > 0 && (

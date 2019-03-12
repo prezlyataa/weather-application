@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-let fetchWeather = (geocodeUrl, res) => {
+let fetchWeather = (geocodeUrl, res, next) => {
   axios
     .get(geocodeUrl)
     .then(response => {
@@ -27,6 +27,7 @@ let fetchWeather = (geocodeUrl, res) => {
       } else {
         console.log(e.message);
       }
+      next();
     });
 };
 
