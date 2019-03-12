@@ -68,8 +68,7 @@ class AppComponent extends Component {
     }
   };
 
-  fetchWeather = () => {
-    const { address } = this.state;
+  fetchWeather = (address) => {
     if (address.length > 0) {
       axios
         .get("/weather", { params: { address: address } })
@@ -85,12 +84,12 @@ class AppComponent extends Component {
 
   setPlaceFromLast = place => {
     this.setState({ address: place });
-    this.fetchWeather();
+    this.fetchWeather(place);
   };
 
   render() {
     const { classes } = this.props;
-    const { weatherData, places } = this.state;
+    const { weatherData, places, address } = this.state;
     console.log(this.state.address);
     return (
       <div className="app">
@@ -107,7 +106,7 @@ class AppComponent extends Component {
             <IconButton
               className={classes.iconButton}
               aria-label="Search"
-              onClick={this.fetchWeather}
+              onClick={() => {this.fetchWeather(address)}}
             >
               <SearchIcon />
             </IconButton>

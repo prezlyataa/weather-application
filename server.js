@@ -3,9 +3,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const router = require("./router");
+const config = require("./config/config");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || config.port;
 
 app
   .use(express.static(path.join(__dirname, "/client/build")))
